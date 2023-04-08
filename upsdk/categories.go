@@ -25,7 +25,7 @@ func (cs *CategoriesService) List() ([]Category, *Response, error) {
 	}
 
 	categories := new([]Category)
-	res, err := cs.client.Do(req, categories)
+	res, err := cs.client.Do(req, &ResponseMessage{Body: categories})
 	if err != nil {
 		return nil, nil, err
 	}

@@ -49,7 +49,7 @@ func (as *AccountsService) List() ([]Account, *Response, error) {
 	}
 
 	accounts := new([]Account)
-	res, err := as.client.Do(req, accounts)
+	res, err := as.client.Do(req, &ResponseMessage{Body: accounts})
 	if err != nil {
 		return nil, nil, err
 	}
@@ -68,9 +68,8 @@ func (as *AccountsService) Get(input *AccountRequest) (*Account, *Response, erro
 	if err != nil {
 		return nil, nil, err
 	}
-
 	account := new(Account)
-	res, err := as.client.Do(req, account)
+	res, err := as.client.Do(req, &ResponseMessage{Body: account})
 	if err != nil {
 		return nil, nil, err
 	}

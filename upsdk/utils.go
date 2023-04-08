@@ -1,35 +1,29 @@
 package upsdk
 
-import (
-	"fmt"
-)
-
 type UtilsService struct {
 	client *Client
 }
 
-type Meta struct {
+type Ping struct {
 	ID          string `json:"id"`
 	StatusEmoji string `json:"statusEmoji"`
 }
 
 type PingResponse struct {
-	Meta Meta `json:"data"`
+	Ping Ping `json:"meta"`
 }
 
-func (us *UtilsService) Ping() (*Meta, *Response, error) {
+func (us *UtilsService) Ping() (*Ping, *Response, error) {
 	req, err := us.client.NewRequest("GET", "util/ping", nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	meta := new(Meta)
+	meta := new(PingResponse)
 	res, err := us.client.Do(req, meta)
 	if err != nil {
-		return nil, nil, err
+		return nil, res, err
 	}
 
-	fmt.Println(res)
-
-	return meta, res, nil
+	return &meta.Ping, res, nil
 }

@@ -48,7 +48,7 @@ func (ts *TransactionsService) List() ([]Transaction, *Response, error) {
 	}
 
 	transactions := new([]Transaction)
-	res, err := ts.client.Do(req, transactions)
+	res, err := ts.client.Do(req, &ResponseMessage{Body: transactions})
 	if err != nil {
 		return nil, nil, err
 	}
