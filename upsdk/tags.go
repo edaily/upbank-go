@@ -22,7 +22,7 @@ func (ts *TagsService) List() ([]Tag, *Response, error) {
 	}
 
 	tags := new([]Tag)
-	res, err := ts.client.Do(req, tags)
+	res, err := ts.client.Do(req, &ResponseMessage{Body: tags})
 	if err != nil {
 		return nil, nil, err
 	}

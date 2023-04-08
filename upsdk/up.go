@@ -88,7 +88,7 @@ func (c *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 		if w, ok := v.(io.Writer); ok {
 			_, err = io.Copy(w, res.Body)
 		} else {
-			err = json.NewDecoder(res.Body).Decode(&ResponseMessage{Body: v})
+			err = json.NewDecoder(res.Body).Decode(v)
 		}
 	}
 
